@@ -1,0 +1,76 @@
+package bj.ats.devteam.afin.Services.Rest;
+
+import bj.ats.devteam.afin.Entity.CourseModule;
+import bj.ats.devteam.afin.Repository.CourseModuleRepository;
+import bj.ats.devteam.afin.utils.CustomErrorType;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+
+@RestController
+@RequestMapping("/apiAfin")
+@Api(description = "Rest Endpoint for Courses Modules", tags = {"Afin"})
+public class CourseModuleResource {
+
+    @Autowired
+    private CourseModuleRepository courseModuleRepository;
+    public static final Logger logger = LoggerFactory.getLogger(CourseModuleResource.class);
+
+    @ApiOperation("create new modules")
+    @ApiResponses(value = @ApiResponse(code =400, message = "invalid input" ))
+    @RequestMapping(value = "/modules/", method = RequestMethod.POST)
+    public ResponseEntity<?> createModule(@RequestBody CourseModule courseModule) {
+            logger.info("Creating module : {}", courseModule.getTitle());
+            courseModuleRepository.save(courseModule);
+              return new ResponseEntity<String>(HttpStatus.CREATED);
+    }
+
+    @ApiOperation("update modules")
+    @ApiResponses(value = @ApiResponse(code =400, message = "invalid input" ))
+    @RequestMapping(value = "/modules/", method = RequestMethod.PUT)
+    public ResponseEntity<CourseModule> updateModule(@RequestBody CourseModule courseModule) {
+        logger.info("Creating module : {}", courseModule.getTitle());
+        CourseModule courseModule1 =   courseModuleRepository.saveAndFlush(courseModule);
+        return new ResponseEntity<CourseModule>(courseModule1, HttpStatus.OK);
+    }
+
+    @ApiOperation("find course module by id")
+    @ApiResponses(value = @ApiResponse(code =400, message = "invalid input" ))
+    @RequestMapping(value = "/modules/{id}", method = RequestMethod.GET)
+    ResponseEntity<CourseModule> getCourseModule(@PathVariable Long id){
+        CourseModule courseModule = courseModuleRepository.findOne(id);
+        logger.info("Finding Course Module {}", courseModule.getId());
+        if(courseModule==null){
+
+                logger.error("Module with id {} not found.", id);
+                return new ResponseEntity(new CustomErrorType("course module with id " + id
+                        + " not found"), HttpStatus.NOT_FOUND);
+            }
+            return new ResponseEntity<CourseModule>(courseModule, HttpStatus.OK);
+        }
+
+
+    @ApiOperation("find all modules")
+    @ApiResponses(value = @ApiResponse(code =400, message = "invalid input" ))
+    @RequestMapping(value = "/modules/all", method = RequestMethod.GET)
+        public ResponseEntity<List<CourseModule>> getAllModules(){
+            List<CourseModule> allModules = courseModuleRepository.findAll();
+
+            if (allModules.isEmpty()){
+                return new ResponseEntity(new CustomErrorType("no module find"), HttpStatus.NO_CONTENT);
+            }
+        return new ResponseEntity(allModules, HttpStatus.OK);
+    }
+
+    }
+
