@@ -10,6 +10,8 @@ import io.swagger.annotations.ApiResponses;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +28,11 @@ public class CourseModuleResource {
     private CourseModuleRepository courseModuleRepository;
     public static final Logger logger = LoggerFactory.getLogger(CourseModuleResource.class);
 
+    /***
+     * @Comment rest resource to create module
+     * @param courseModule
+     * @return
+     */
     @ApiOperation("create new modules")
     @ApiResponses(value = @ApiResponse(code =400, message = "invalid input" ))
     @RequestMapping(value = "/modules/", method = RequestMethod.POST)
@@ -72,5 +79,15 @@ public class CourseModuleResource {
         return new ResponseEntity(allModules, HttpStatus.OK);
     }
 
+    @ApiOperation("find all courses by page")
+    @ApiResponses(value = @ApiResponse(code =400, message = "invalid input" ))
+    @RequestMapping(value = "/modules", method = RequestMethod.GET)
+    public  ResponseEntity<Page<CourseModule>> getModulesPage(int page, int size){
+            Page<CourseModule> modulePage = courseModuleRepository.findAll(new PageRequest(page,size));
+            if (!modulePage.hasContent()){
+                return new ResponseEntity(new CustomErrorType("No module find"),HttpStatus.NO_CONTENT);
+            }
+            return new ResponseEntity<Page<CourseModule>>(modulePage, HttpStatus.OK);
+    }
     }
 

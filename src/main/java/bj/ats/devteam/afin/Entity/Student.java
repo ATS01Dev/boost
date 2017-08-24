@@ -6,10 +6,11 @@ import java.io.Serializable;
 import java.util.Set;
 @Entity
 public class Student extends Users implements Serializable{
+
+    @OneToMany
+    private Set<Marks> marks;
     @OneToMany
     private Set<Course> courses;
-    @OneToMany
-    private Set<Homework> homework;
     public Student() {
     }
 
@@ -21,11 +22,11 @@ public class Student extends Users implements Serializable{
         this.courses = courses;
     }
 
-    public Set<Homework> getHomework() {
-        return homework;
+    public Set<Marks> getMarks() {
+        return marks;
     }
 
-    public void setHomework(Set<Homework> homework) {
-        this.homework = homework;
+    public void setMarks(Set<Marks> marks) {
+        this.marks = marks;
     }
 }

@@ -12,8 +12,7 @@ public class HwQuestion {
     private Long id;
     private String statement;
     private String answer;
-    private String studentAnswer;
-    private double mark;
+    private double qmark;
 
     public Long getId() {
         return id;
@@ -31,6 +30,10 @@ public class HwQuestion {
         this.statement = statement;
     }
 
+    public double getQmark() {
+        return qmark;
+    }
+
     public String getAnswer() {
         return answer;
     }
@@ -38,20 +41,8 @@ public class HwQuestion {
     public void setAnswer(String answer) {
         this.answer = answer;
     }
-
-    public String getStudentAnswer() {
-        return studentAnswer;
+    public void setQmark(double qmark) {
+        this.qmark = qmark;
     }
 
-    public void setStudentAnswer(String studentAnswer) {
-        this.studentAnswer = studentAnswer;
-    }
-
-    public double getMark() {
-        return mark;
-    }
-
-    public void setMark(double mark) {
-        this.mark = mark;
-    }
 }

@@ -5,6 +5,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.io.Serializable;
+import java.util.Set;
+
 @Entity
 public class ModuleMaterial implements Serializable{
     @Id
@@ -12,7 +14,6 @@ public class ModuleMaterial implements Serializable{
     private Long id;
     private String type;
     private String url;
-
     public ModuleMaterial() {
     }
 

@@ -14,6 +14,8 @@ public class CourseModule implements Serializable{
     private String sommary;
     @OneToMany
     private Set<ModuleMaterial> moduleMaterials;
+    @OneToMany
+    private Set<Homework> homework;
     private ZonedDateTime opening;
 
     public CourseModule() {
@@ -62,5 +64,13 @@ public class CourseModule implements Serializable{
 
     public void setOpening(ZonedDateTime opening) {
         this.opening = opening;
+    }
+
+    public Set<Homework> getHomework() {
+        return homework;
+    }
+
+    public void setHomework(Set<Homework> homework) {
+        this.homework = homework;
     }
 }

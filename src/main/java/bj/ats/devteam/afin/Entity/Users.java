@@ -3,6 +3,8 @@ package bj.ats.devteam.afin.Entity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.ZonedDateTime;
+
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Users implements Serializable{
@@ -19,8 +21,13 @@ public abstract class Users implements Serializable{
     private String profession;
     private String level;
     private String profile;
-
+    private ZonedDateTime registring;
     public Users() {
+    }
+
+    public Users(String name, String surnames) {
+        this.name = name;
+        this.surnames = surnames;
     }
 
     public Long getId() {
@@ -109,5 +116,13 @@ public abstract class Users implements Serializable{
 
     public void setProfile(String profile) {
         this.profile = profile;
+    }
+
+    public ZonedDateTime getRegistring() {
+        return registring;
+    }
+
+    public void setRegistring(ZonedDateTime registring) {
+        this.registring = registring;
     }
 }

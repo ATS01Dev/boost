@@ -2,6 +2,7 @@ package bj.ats.devteam.afin.Entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Set;
 @Entity
@@ -13,13 +14,18 @@ public class Course implements Serializable{
     private String title;
     private ZonedDateTime opening;
     private ZonedDateTime closing;
-
+    private ZonedDateTime registring ;
     @OneToMany
     private Set<CourseModule> courseModules;
     @OneToMany
     private Set<Teacher> teachers;
 
     public Course() {
+    }
+
+    public Course(String domain, String title) {
+        this.domain = domain;
+        this.title = title;
     }
 
     public Long getId() {
@@ -76,5 +82,13 @@ public class Course implements Serializable{
 
     public void setTeachers(Set<Teacher> teachers) {
         this.teachers = teachers;
+    }
+
+    public ZonedDateTime getRegistring() {
+        return registring;
+    }
+
+    public void setRegistring(ZonedDateTime registring) {
+        this.registring = registring;
     }
 }

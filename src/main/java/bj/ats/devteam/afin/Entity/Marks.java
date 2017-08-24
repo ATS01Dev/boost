@@ -2,18 +2,17 @@ package bj.ats.devteam.afin.Entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Set;
-
 @Entity
-public class Homework implements Serializable{
+public class Marks implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @OneToMany
-    private Set<HwQuestion> hwQuestions;
+    private Long id ;
     private double score;
+    @OneToOne
+    private HwQuestion hwQuestion;
 
-    public Homework() {
+
+    public Marks() {
     }
 
     public Long getId() {
@@ -24,19 +23,19 @@ public class Homework implements Serializable{
         this.id = id;
     }
 
-    public Set<HwQuestion> getHwQuestions() {
-        return hwQuestions;
-    }
-
-    public void setHwQuestions(Set<HwQuestion> hwQuestions) {
-        this.hwQuestions = hwQuestions;
-    }
-
     public double getScore() {
         return score;
     }
 
     public void setScore(double score) {
         this.score = score;
+    }
+
+    public HwQuestion getHwQuestion() {
+        return hwQuestion;
+    }
+
+    public void setHwQuestion(HwQuestion hwQuestion) {
+        this.hwQuestion = hwQuestion;
     }
 }
