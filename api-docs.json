@@ -1,0 +1,1498 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Boost rest APi",
+    "version": "2.0",
+    "title": "boost rest api",
+    "contact": {
+      "name": "Ats dev team"
+    },
+    "license": {}
+  },
+  "host": "localhost:8080",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Afin",
+      "description": "Rest Endpoint for Courses Modules"
+    }
+  ],
+  "paths": {
+    "/apiAfin/courses": {
+      "get": {
+        "tags": [
+          "course-resource"
+        ],
+        "summary": "find all courses by page",
+        "operationId": "getCoursesPaginateUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "size",
+            "description": "size",
+            "required": false,
+            "schema": {
+              "type": "int"
+            }
+          },
+          {
+            "in": "body",
+            "name": "page",
+            "description": "page",
+            "required": false,
+            "schema": {
+              "type": "int"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Page«Course»"
+            }
+          },
+          "400": {
+            "description": "invalid input"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/apiAfin/courses/": {
+      "post": {
+        "tags": [
+          "course-resource"
+        ],
+        "summary": "create new course",
+        "operationId": "createModuleUsingPOST_1",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "course",
+            "description": "course",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Course"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "invalid input"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "course-resource"
+        ],
+        "summary": "update course",
+        "operationId": "updateModuleUsingPUT_1",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "course",
+            "description": "course",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Course"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Course"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "invalid input"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/apiAfin/courses/all": {
+      "get": {
+        "tags": [
+          "course-resource"
+        ],
+        "summary": "find all courses",
+        "operationId": "getAllCoursesUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Course"
+              }
+            }
+          },
+          "400": {
+            "description": "invalid input"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/apiAfin/courses/{id}": {
+      "get": {
+        "tags": [
+          "course-resource"
+        ],
+        "summary": "find course by id",
+        "operationId": "getCourseUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Course"
+            }
+          },
+          "400": {
+            "description": "invalid input"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/apiAfin/courses/{id}/module": {
+      "post": {
+        "tags": [
+          "course-resource"
+        ],
+        "summary": "addModule",
+        "operationId": "addModuleUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "in": "body",
+            "name": "courseModule",
+            "description": "courseModule",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CourseModule"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Course"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/apiAfin/modules": {
+      "get": {
+        "tags": [
+          "course-module-resource"
+        ],
+        "summary": "find all courses by page",
+        "operationId": "getModulesPageUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "page",
+            "description": "page",
+            "required": false,
+            "schema": {
+              "type": "int"
+            }
+          },
+          {
+            "in": "body",
+            "name": "size",
+            "description": "size",
+            "required": false,
+            "schema": {
+              "type": "int"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Page«CourseModule»"
+            }
+          },
+          "400": {
+            "description": "invalid input"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/apiAfin/modules/": {
+      "post": {
+        "tags": [
+          "course-module-resource"
+        ],
+        "summary": "create new modules",
+        "operationId": "createModuleUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "courseModule",
+            "description": "courseModule",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CourseModule"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "invalid input"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "course-module-resource"
+        ],
+        "summary": "update modules",
+        "operationId": "updateModuleUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "courseModule",
+            "description": "courseModule",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CourseModule"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CourseModule"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "invalid input"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/apiAfin/modules/all": {
+      "get": {
+        "tags": [
+          "course-module-resource"
+        ],
+        "summary": "find all modules",
+        "operationId": "getAllModulesUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CourseModule"
+              }
+            }
+          },
+          "400": {
+            "description": "invalid input"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/apiAfin/modules/{id}": {
+      "get": {
+        "tags": [
+          "course-module-resource"
+        ],
+        "summary": "find course module by id",
+        "operationId": "getCourseModuleUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CourseModule"
+            }
+          },
+          "400": {
+            "description": "invalid input"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/apiAfin/teachers": {
+      "get": {
+        "tags": [
+          "teacher-resource"
+        ],
+        "summary": "find all teachers by page",
+        "operationId": "getTeacherPaginateUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "size",
+            "description": "size",
+            "required": false,
+            "schema": {
+              "type": "int"
+            }
+          },
+          {
+            "in": "body",
+            "name": "page",
+            "description": "page",
+            "required": false,
+            "schema": {
+              "type": "int"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Page«Teacher»"
+            }
+          },
+          "400": {
+            "description": "invalid input"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/apiAfin/teachers/": {
+      "post": {
+        "tags": [
+          "teacher-resource"
+        ],
+        "summary": "create new teachers",
+        "operationId": "createTeacherUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "teacher",
+            "description": "teacher",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Teacher"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "invalid input"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "teacher-resource"
+        ],
+        "summary": "update teachers",
+        "operationId": "updateTeacherUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "teacher",
+            "description": "teacher",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Teacher"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Teacher"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "invalid input"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/apiAfin/teachers/all": {
+      "get": {
+        "tags": [
+          "teacher-resource"
+        ],
+        "summary": "find all teachers",
+        "operationId": "getAllTeachersUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Teacher"
+              }
+            }
+          },
+          "400": {
+            "description": "invalid input"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/apiAfin/teachers/{id}": {
+      "get": {
+        "tags": [
+          "teacher-resource"
+        ],
+        "summary": "find teachers by id",
+        "operationId": "getTecherUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Teacher"
+            }
+          },
+          "400": {
+            "description": "invalid input"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/apiAfin/teachers/{id}/course": {
+      "get": {
+        "tags": [
+          "teacher-resource"
+        ],
+        "summary": "getTeachersCourses",
+        "operationId": "getTeachersCoursesUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Course"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "LocalDateTime": {
+      "properties": {
+        "chronology": {
+          "$ref": "#/definitions/Chronology"
+        },
+        "dayOfMonth": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "dayOfWeek": {
+          "type": "string",
+          "enum": [
+            "MONDAY",
+            "TUESDAY",
+            "WEDNESDAY",
+            "THURSDAY",
+            "FRIDAY",
+            "SATURDAY",
+            "SUNDAY"
+          ]
+        },
+        "dayOfYear": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "hour": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "minute": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "month": {
+          "type": "string",
+          "enum": [
+            "JANUARY",
+            "FEBRUARY",
+            "MARCH",
+            "APRIL",
+            "MAY",
+            "JUNE",
+            "JULY",
+            "AUGUST",
+            "SEPTEMBER",
+            "OCTOBER",
+            "NOVEMBER",
+            "DECEMBER"
+          ]
+        },
+        "monthValue": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "nano": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "second": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "year": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "Page«Teacher»": {
+      "properties": {
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Teacher"
+          }
+        },
+        "first": {
+          "type": "boolean"
+        },
+        "last": {
+          "type": "boolean"
+        },
+        "number": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "numberOfElements": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "sort": {
+          "$ref": "#/definitions/Sort"
+        },
+        "totalElements": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "ModuleMaterial": {
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "type": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      }
+    },
+    "LocalDate": {
+      "properties": {
+        "chronology": {
+          "$ref": "#/definitions/IsoChronology"
+        },
+        "dayOfMonth": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "dayOfWeek": {
+          "type": "string",
+          "enum": [
+            "MONDAY",
+            "TUESDAY",
+            "WEDNESDAY",
+            "THURSDAY",
+            "FRIDAY",
+            "SATURDAY",
+            "SUNDAY"
+          ]
+        },
+        "dayOfYear": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "era": {
+          "$ref": "#/definitions/Era"
+        },
+        "leapYear": {
+          "type": "boolean"
+        },
+        "month": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "monthValue": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "year": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "ZoneOffset": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "rules": {
+          "$ref": "#/definitions/ZoneRules"
+        },
+        "totalSeconds": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "ZonedDateTime": {
+      "properties": {
+        "chronology": {
+          "$ref": "#/definitions/Chronology"
+        },
+        "dayOfMonth": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "dayOfWeek": {
+          "type": "string",
+          "enum": [
+            "MONDAY",
+            "TUESDAY",
+            "WEDNESDAY",
+            "THURSDAY",
+            "FRIDAY",
+            "SATURDAY",
+            "SUNDAY"
+          ]
+        },
+        "dayOfYear": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "hour": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "minute": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "month": {
+          "type": "string",
+          "enum": [
+            "JANUARY",
+            "FEBRUARY",
+            "MARCH",
+            "APRIL",
+            "MAY",
+            "JUNE",
+            "JULY",
+            "AUGUST",
+            "SEPTEMBER",
+            "OCTOBER",
+            "NOVEMBER",
+            "DECEMBER"
+          ]
+        },
+        "monthValue": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "nano": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "offset": {
+          "$ref": "#/definitions/ZoneOffset"
+        },
+        "second": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "year": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "zone": {
+          "$ref": "#/definitions/ZoneId"
+        }
+      }
+    },
+    "CourseModule": {
+      "properties": {
+        "homework": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Homework"
+          }
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "moduleMaterials": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ModuleMaterial"
+          }
+        },
+        "opening": {
+          "$ref": "#/definitions/ZonedDateTime"
+        },
+        "sommary": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "Sort": {},
+    "Chronology": {
+      "properties": {
+        "calendarType": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "ZoneOffsetTransition": {
+      "properties": {
+        "dateTimeAfter": {
+          "$ref": "#/definitions/LocalDateTime"
+        },
+        "dateTimeBefore": {
+          "$ref": "#/definitions/LocalDateTime"
+        },
+        "duration": {
+          "$ref": "#/definitions/Duration"
+        },
+        "gap": {
+          "type": "boolean"
+        },
+        "instant": {
+          "$ref": "#/definitions/Instant"
+        },
+        "overlap": {
+          "type": "boolean"
+        }
+      }
+    },
+    "Course": {
+      "properties": {
+        "closing": {
+          "$ref": "#/definitions/ZonedDateTime"
+        },
+        "courseModules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CourseModule"
+          }
+        },
+        "domain": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "opening": {
+          "$ref": "#/definitions/ZonedDateTime"
+        },
+        "registring": {
+          "$ref": "#/definitions/ZonedDateTime"
+        },
+        "teachers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Teacher"
+          }
+        },
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "ZoneOffsetTransitionRule": {
+      "properties": {
+        "dayOfMonthIndicator": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "dayOfWeek": {
+          "type": "string",
+          "enum": [
+            "MONDAY",
+            "TUESDAY",
+            "WEDNESDAY",
+            "THURSDAY",
+            "FRIDAY",
+            "SATURDAY",
+            "SUNDAY"
+          ]
+        },
+        "localTime": {
+          "$ref": "#/definitions/LocalTime"
+        },
+        "midnightEndOfDay": {
+          "type": "boolean"
+        },
+        "month": {
+          "type": "string",
+          "enum": [
+            "JANUARY",
+            "FEBRUARY",
+            "MARCH",
+            "APRIL",
+            "MAY",
+            "JUNE",
+            "JULY",
+            "AUGUST",
+            "SEPTEMBER",
+            "OCTOBER",
+            "NOVEMBER",
+            "DECEMBER"
+          ]
+        },
+        "timeDefinition": {
+          "type": "string",
+          "enum": [
+            "UTC",
+            "WALL",
+            "STANDARD"
+          ]
+        }
+      }
+    },
+    "HwQuestion": {
+      "properties": {
+        "answer": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "qmark": {
+          "type": "number",
+          "format": "double"
+        },
+        "statement": {
+          "type": "string"
+        }
+      }
+    },
+    "ZoneId": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "rules": {
+          "$ref": "#/definitions/ZoneRules"
+        }
+      }
+    },
+    "LocalTime": {
+      "properties": {
+        "hour": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "minute": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "nano": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "second": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "Page«CourseModule»": {
+      "properties": {
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CourseModule"
+          }
+        },
+        "first": {
+          "type": "boolean"
+        },
+        "last": {
+          "type": "boolean"
+        },
+        "number": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "numberOfElements": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "sort": {
+          "$ref": "#/definitions/Sort"
+        },
+        "totalElements": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "TemporalUnit": {
+      "properties": {
+        "dateBased": {
+          "type": "boolean"
+        },
+        "durationEstimated": {
+          "type": "boolean"
+        },
+        "timeBased": {
+          "type": "boolean"
+        }
+      }
+    },
+    "Instant": {
+      "properties": {
+        "epochSecond": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "nano": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "Teacher": {
+      "properties": {
+        "birthday": {
+          "$ref": "#/definitions/LocalDate"
+        },
+        "contact": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "gender": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "level": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "profession": {
+          "type": "string"
+        },
+        "profile": {
+          "type": "string"
+        },
+        "registring": {
+          "$ref": "#/definitions/ZonedDateTime"
+        },
+        "surnames": {
+          "type": "string"
+        }
+      }
+    },
+    "Duration": {
+      "properties": {
+        "nano": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "negative": {
+          "type": "boolean"
+        },
+        "seconds": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "units": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TemporalUnit"
+          }
+        },
+        "zero": {
+          "type": "boolean"
+        }
+      }
+    },
+    "IsoChronology": {
+      "properties": {
+        "calendarType": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "Era": {
+      "properties": {
+        "value": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "Page«Course»": {
+      "properties": {
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Course"
+          }
+        },
+        "first": {
+          "type": "boolean"
+        },
+        "last": {
+          "type": "boolean"
+        },
+        "number": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "numberOfElements": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "sort": {
+          "$ref": "#/definitions/Sort"
+        },
+        "totalElements": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "ZoneRules": {
+      "properties": {
+        "fixedOffset": {
+          "type": "boolean"
+        },
+        "transitionRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ZoneOffsetTransitionRule"
+          }
+        },
+        "transitions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ZoneOffsetTransition"
+          }
+        }
+      }
+    },
+    "Homework": {
+      "properties": {
+        "hwQuestions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HwQuestion"
+          }
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "score": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    }
+  }
+}
