@@ -10,9 +10,10 @@ public class Discussion implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id ;
     private String ask;
+    private String username ;
     @OneToMany
     private Set<Solutions> solutions;
-    private ZonedDateTime registring;
+    private ZonedDateTime registering;
 
     public Discussion() {
     }
@@ -41,11 +42,19 @@ public class Discussion implements Serializable{
         this.solutions = solutions;
     }
 
-    public ZonedDateTime getRegistring() {
-        return registring;
+    public ZonedDateTime getRegistering() {
+        return registering;
     }
 
-    public void setRegistring(ZonedDateTime registring) {
-        this.registring = registring;
+    public void setRegistering(ZonedDateTime registering) {
+        this.registering = registering;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

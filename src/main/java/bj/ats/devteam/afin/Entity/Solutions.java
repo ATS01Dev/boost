@@ -10,23 +10,16 @@ public class Solutions implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String text;
-    private ZonedDateTime registring;
-    @OneToOne
-    private Users users ;
+    private ZonedDateTime registering;
+    private String username ;
     public Solutions() {
     }
+
 
     public Long getId() {
         return id;
     }
 
-    public Users getUsers() {
-        return users;
-    }
-
-    public void setUsers(Users users) {
-        this.users = users;
-    }
 
     public void setId(Long id) {
         this.id = id;
@@ -40,11 +33,19 @@ public class Solutions implements Serializable {
         this.text = text;
     }
 
-    public ZonedDateTime getRegistring() {
-        return registring;
+    public ZonedDateTime getRegistering() {
+        return registering;
     }
 
-    public void setRegistring(ZonedDateTime registring) {
-        this.registring = registring;
+    public void setRegistering(ZonedDateTime registering) {
+        this.registering = registering;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }
