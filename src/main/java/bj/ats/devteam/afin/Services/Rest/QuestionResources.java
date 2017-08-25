@@ -41,7 +41,7 @@ public class QuestionResources {
         return new ResponseEntity<String>(HttpStatus.CREATED);
     }
 
-    @ApiOperation("update modules")
+    @ApiOperation("update question")
     @ApiResponses(value = @ApiResponse(code =400, message = "invalid input" ))
     @RequestMapping(value = "/questions/", method = RequestMethod.PUT)
     public ResponseEntity<HwQuestion> updateQuestions(@RequestBody HwQuestion hwQuestion) {

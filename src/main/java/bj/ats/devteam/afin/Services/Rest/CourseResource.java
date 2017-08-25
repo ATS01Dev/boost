@@ -106,6 +106,8 @@ public class CourseResource {
      * @param courseModule
      * @return
      */
+    @ApiOperation("add module to course the id param is for course")
+    @ApiResponses(value = @ApiResponse(code =400, message = "invalid input" ))
     @RequestMapping(value = "/courses/{id}/module", method = RequestMethod.POST)
     public ResponseEntity<Course> addModule(@PathVariable Long id, @RequestBody CourseModule courseModule){
             Course course = courseRepository.findOne(id);

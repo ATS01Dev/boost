@@ -36,16 +36,16 @@ public class ModuleMaterialResource {
     @ApiOperation("create new materials")
     @ApiResponses(value = @ApiResponse(code =400, message = "invalid input" ))
     @RequestMapping(value = "/materials/", method = RequestMethod.POST)
-    public ResponseEntity<?> createModule(@RequestBody ModuleMaterial materials) {
+    public ResponseEntity<?> createMaterial(@RequestBody ModuleMaterial materials) {
             logger.info("Creating materials : {}", materials.getType());
         materialRepository.save(materials);
               return new ResponseEntity<String>(HttpStatus.CREATED);
     }
 
-    @ApiOperation("update modules")
+    @ApiOperation("update material")
     @ApiResponses(value = @ApiResponse(code =400, message = "invalid input" ))
     @RequestMapping(value = "/materials/", method = RequestMethod.PUT)
-    public ResponseEntity<ModuleMaterial> updateModule(@RequestBody ModuleMaterial moduleMaterial1) {
+    public ResponseEntity<ModuleMaterial> updateMaterial(@RequestBody ModuleMaterial moduleMaterial1) {
         logger.info("Creating materials : {}", moduleMaterial1.getType());
         ModuleMaterial moduleMaterial =   materialRepository.saveAndFlush(moduleMaterial1);
         return new ResponseEntity<ModuleMaterial>(moduleMaterial, HttpStatus.OK);
@@ -67,7 +67,7 @@ public class ModuleMaterialResource {
         }
 
 
-    @ApiOperation("find all modules")
+    @ApiOperation("find all Material")
     @ApiResponses(value = @ApiResponse(code =400, message = "invalid input" ))
     @RequestMapping(value = "/materials/all", method = RequestMethod.GET)
         public ResponseEntity<List<ModuleMaterial>> getAllMaterials(){
@@ -79,7 +79,7 @@ public class ModuleMaterialResource {
         return new ResponseEntity(allMaterials, HttpStatus.OK);
     }
 
-    @ApiOperation("find all courses by page")
+    @ApiOperation("find all Material by page")
     @ApiResponses(value = @ApiResponse(code =400, message = "invalid input" ))
     @RequestMapping(value = "/materials", method = RequestMethod.GET)
     public  ResponseEntity<Page<ModuleMaterial>> getMaterialsPage(int page, int size){

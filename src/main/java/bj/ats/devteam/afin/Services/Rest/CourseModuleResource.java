@@ -85,7 +85,7 @@ public class CourseModuleResource {
         return new ResponseEntity(allModules, HttpStatus.OK);
     }
 
-    @ApiOperation("find all courses by page")
+    @ApiOperation("find all modules by page")
     @ApiResponses(value = @ApiResponse(code =400, message = "invalid input" ))
     @RequestMapping(value = "/modules", method = RequestMethod.GET)
     public  ResponseEntity<Page<CourseModule>> getModulesPage(int page, int size){

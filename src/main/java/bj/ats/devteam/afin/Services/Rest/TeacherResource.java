@@ -103,23 +103,8 @@ public class TeacherResource {
         return new ResponseEntity<Page<Teacher>>(teachersPage,HttpStatus.OK);
     }
 
-   /* @RequestMapping(value = "/teachers/{id}/course", method = RequestMethod.GET)
-    public ResponseEntity<Set<Course>> getTeachersCourses(@PathVariable Long id){
-        List<Course> courses = courseRepository.findAll();
-        Set<Course> techersCours = new HashSet<>();
-
-        for (Course cours : courses ){
-            for (Teacher teacher : cours.getTeachers()){
-                if (teacher.getId()==id)
-                    techersCours.add(cours);
-            }
-        }
-        if (techersCours.isEmpty()){
-            return new ResponseEntity(new CustomErrorType("no course find"), HttpStatus.NO_CONTENT);
-        }
-        return new ResponseEntity<Set<Course>>(techersCours,HttpStatus.OK);
-    }*/
-
+    @ApiOperation("find teachers courses id param is for teacher")
+    @ApiResponses(value = @ApiResponse(code =400, message = "invalid input" ))
     @RequestMapping(value = "/teachers/{id}/course", method = RequestMethod.GET)
     public ResponseEntity<List<Course>> getCourses( @PathVariable Long id ){
      List<Course> teachersCourses =  courseRepository.findByTeachers(teacherRepository.findOne(id));

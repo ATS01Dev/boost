@@ -101,6 +101,8 @@ public class StudentResource {
         return new ResponseEntity<>(studentPage, HttpStatus.OK);
     }
 
+    @ApiOperation("find add new course to student courses list")
+    @ApiResponses(value = @ApiResponse(code = 400, message = "invalid input"))
     @RequestMapping(value = "/students/addcourse", method = RequestMethod.PUT)
     public ResponseEntity<?> addStudentCourses(Long s_id, Long c_id) {
             Student student = studentRepository.findOne(s_id);

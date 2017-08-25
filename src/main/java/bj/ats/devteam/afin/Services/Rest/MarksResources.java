@@ -50,7 +50,7 @@ public class MarksResources  {
         return new ResponseEntity<Marks>(marks1, HttpStatus.OK);
     }
 
-    @ApiOperation("find course by id")
+    @ApiOperation("find marks by id")
     @ApiResponses(value = @ApiResponse(code =400, message = "invalid input" ))
     @RequestMapping(value = "/marks/{id}", method = RequestMethod.GET)
     ResponseEntity<Marks> getMarks(@PathVariable Long id){

@@ -25,7 +25,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/apiAfin")
 @Api(description = "Rest Endpoint for Homeworks ", tags = {"Afin"})
-public class HomworkResource {
+public class HomeworkResource {
 
     @Autowired
     private HomeworkRepository homeworkRepository;
@@ -70,7 +70,7 @@ public class HomworkResource {
      * recupere tous les cours
      * @return
      */
-    @ApiOperation("find all courses")
+    @ApiOperation("find all homework")
     @ApiResponses(value = @ApiResponse(code =400, message = "invalid input" ))
     @RequestMapping(value = "/homeworks/all", method = RequestMethod.GET)
     public ResponseEntity<List<Homework>> getAllCourses(){
@@ -103,6 +103,8 @@ public class HomworkResource {
      * @param
      * @return
      */
+    @ApiOperation("add question to homework; id param is for homework")
+    @ApiResponses(value = @ApiResponse(code =400, message = "invalid input" ))
     @RequestMapping(value = "/homeworks/{id}/questions", method = RequestMethod.POST)
     public ResponseEntity<Homework> addQuestion(@PathVariable Long id, @RequestBody HwQuestion hwQuestion){
         Homework homework = homeworkRepository.findOne(id);
