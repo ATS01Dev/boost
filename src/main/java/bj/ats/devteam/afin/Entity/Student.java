@@ -14,6 +14,10 @@ public class Student extends Users implements Serializable{
     public Student() {
     }
 
+    public Student(String name, String surnames) {
+        super(name, surnames);
+    }
+
     public Set<Course> getCourses() {
         return courses;
     }

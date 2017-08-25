@@ -1,7 +1,9 @@
 package bj.ats.devteam.afin.Services.Rest;
 
 import bj.ats.devteam.afin.Entity.CourseModule;
+import bj.ats.devteam.afin.Entity.ModuleMaterial;
 import bj.ats.devteam.afin.Repository.CourseModuleRepository;
+import bj.ats.devteam.afin.Repository.MaterialRepository;
 import bj.ats.devteam.afin.utils.CustomErrorType;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -16,7 +18,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @RestController
@@ -26,6 +30,7 @@ public class CourseModuleResource {
 
     @Autowired
     private CourseModuleRepository courseModuleRepository;
+    private MaterialRepository materialRepository;
     public static final Logger logger = LoggerFactory.getLogger(CourseModuleResource.class);
 
     /***
@@ -39,8 +44,9 @@ public class CourseModuleResource {
     public ResponseEntity<?> createModule(@RequestBody CourseModule courseModule) {
             logger.info("Creating module : {}", courseModule.getTitle());
             courseModuleRepository.save(courseModule);
-              return new ResponseEntity<String>(HttpStatus.CREATED);
+        return new ResponseEntity<String>(HttpStatus.CREATED);
     }
+
 
     @ApiOperation("update modules")
     @ApiResponses(value = @ApiResponse(code =400, message = "invalid input" ))
@@ -89,5 +95,27 @@ public class CourseModuleResource {
             }
             return new ResponseEntity<Page<CourseModule>>(modulePage, HttpStatus.OK);
     }
+
+    /***
+     * @Comment rest resource to create module
+     * @param moduleMaterial
+     * @return
+     */
+    @ApiOperation("create new modules")
+    @ApiResponses(value = @ApiResponse(code =400, message = "invalid input" ))
+    @RequestMapping(value = "/modules/{id}/addmaterials", method = RequestMethod.POST)
+    public ResponseEntity<?> createModule(@PathVariable Long id, @RequestBody ModuleMaterial moduleMaterial) {
+        logger.info("Creating module : {}", moduleMaterial.getTitle());
+        CourseModule courseModule = courseModuleRepository.findOne(id);
+        if (courseModule.getModuleMaterials()==null)
+        {
+            Set<ModuleMaterial> materials = new HashSet<>();
+            courseModule.setModuleMaterials(materials);
+        }
+        courseModule.getModuleMaterials().add(materialRepository.save(moduleMaterial));
+        courseModuleRepository.saveAndFlush(courseModule);
+        return new ResponseEntity<String>(HttpStatus.CREATED);
+    }
+
     }
 

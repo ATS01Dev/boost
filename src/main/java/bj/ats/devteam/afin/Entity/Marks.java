@@ -11,7 +11,6 @@ public class Marks implements Serializable {
     @OneToOne
     private HwQuestion hwQuestion;
 
-
     public Marks() {
     }
 

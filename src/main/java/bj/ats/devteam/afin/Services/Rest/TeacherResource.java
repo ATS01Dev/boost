@@ -103,7 +103,7 @@ public class TeacherResource {
         return new ResponseEntity<Page<Teacher>>(teachersPage,HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/teachers/{id}/course", method = RequestMethod.GET)
+   /* @RequestMapping(value = "/teachers/{id}/course", method = RequestMethod.GET)
     public ResponseEntity<Set<Course>> getTeachersCourses(@PathVariable Long id){
         List<Course> courses = courseRepository.findAll();
         Set<Course> techersCours = new HashSet<>();
@@ -118,7 +118,14 @@ public class TeacherResource {
             return new ResponseEntity(new CustomErrorType("no course find"), HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<Set<Course>>(techersCours,HttpStatus.OK);
-    }
+    }*/
 
+    @RequestMapping(value = "/teachers/{id}/course", method = RequestMethod.GET)
+    public ResponseEntity<List<Course>> getCourses( @PathVariable Long id ){
+     List<Course> teachersCourses =  courseRepository.findByTeachers(teacherRepository.findOne(id));
+
+        return new ResponseEntity<>(teachersCourses,HttpStatus.OK);
+
+    }
     }
 

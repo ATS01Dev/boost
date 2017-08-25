@@ -1,5 +1,7 @@
 package bj.ats.devteam.afin.Entity;
 
+import org.hibernate.annotations.Fetch;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -17,15 +19,24 @@ public class Course implements Serializable{
     private ZonedDateTime registring ;
     @OneToMany
     private Set<CourseModule> courseModules;
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private Set<Teacher> teachers;
-
+    @OneToMany
+    private Set<Discussion> discussions;
     public Course() {
     }
 
     public Course(String domain, String title) {
         this.domain = domain;
         this.title = title;
+    }
+
+    public Set<Discussion> getDiscussions() {
+        return discussions;
+    }
+
+    public void setDiscussions(Set<Discussion> discussions) {
+        this.discussions = discussions;
     }
 
     public Long getId() {
